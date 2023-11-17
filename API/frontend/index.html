@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <form action="/getCityWeather" method="post"> -->
+  <label for="x"> Enter a city name</label>
+  <input id="x" type="text">
+  <input type="submit" value="Get the weather!" id="submitBtn">
+  <!-- </form> -->
+
+  <div id="result"></div>
+
+
+  <script>
+    document.getElementById("submitBtn").addEventListener("click", async () => {
+      const x = document.getElementById("x").value
+      resp = await fetch(`http://localhost:3000/getCityWeather?cname=${x}`)
+      respJson = await resp.json()
+      document.getElementById("result").innerHTML = respJson.main.temp
+      document.getElementById("result").innerHTML += respJson.weather[0].description
+      document.getElementById("result").innerHTML += `<img src="https://openweathermap.org/img/wn/${respJson.weather[0].icon}@2x.png
+"> `
+
+    })
+  </script>
+</body>
+
+</html>
